@@ -38,6 +38,7 @@ class TookController extends Controller {
         v.votes,
         v.pieces,
         v.create_time,
+        v.punctuate_color,
       ];
     });
     const result = await service.took.add(data);

@@ -24,7 +24,7 @@ class TookService extends Service {
   }
 
   async add(data) {
-    const sql = 'INSERT INTO zc_took(province,city,area,address,party_B_name,party_A_name,votes,pieces,create_time) VALUES ? ';
+    const sql = 'INSERT INTO zc_took(province,city,area,address,party_B_name,party_A_name,votes,pieces,create_time,punctuate_color) VALUES ? ';
     const client = this.app.mysql.get('notes');
     const result = await client.query(sql, [data]);
     return this.success(result);
