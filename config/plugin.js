@@ -15,3 +15,7 @@ exports.cors = {
   package: 'egg-cors',
 };
 
+exports.elasticsearch = {
+  enable: true,
+  package: 'egg-es',
+};
