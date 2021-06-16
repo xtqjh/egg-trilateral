@@ -27,9 +27,9 @@
     "node": ">=10.0.0"
   },
   "scripts": {
-    "start": "egg-scripts start --port 7000 --daemon --env=prod --title=egg-server-egg-trilateral",
+    "start": "egg-scripts start --port 7010 --daemon --env=prod --title=egg-server-egg-trilateral",
     "stop": "egg-scripts stop --title=egg-server-egg-trilateral",
-    "dev": "egg-bin dev --port 7000",
+    "dev": "egg-bin dev --port 7010",
     "debug": "egg-bin debug",
     "test": "npm run lint -- --fix && npm run test-local",
     "test-local": "egg-bin test",

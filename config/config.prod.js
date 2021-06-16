@@ -22,7 +22,7 @@ module.exports = appInfo => {
   ];
 
   config.errorHandler = {
-    match: '/logs',
+    match: '/api/*',
   };
 
   config.gzip = {

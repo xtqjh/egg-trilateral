@@ -22,7 +22,7 @@ module.exports = appInfo => {
   ];
 
   config.errorHandler = {
-    match: '/logs',
+    match: '/api/*',
   };
 
   config.gzip = {
@@ -41,7 +41,7 @@ module.exports = appInfo => {
   };
 
   exports.elasticsearch = {
-    host: 'http://localhost:9200',
+    host: 'http://172.16.111.24:9200',
     apiVersion: '7.6',
   };
 
