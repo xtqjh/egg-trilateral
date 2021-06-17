@@ -37,8 +37,6 @@ class ClientsController extends Controller {
     }
   }
 
-
-
 }
 
 module.exports = ClientsController;

@@ -10,8 +10,8 @@ class HomeController extends Controller {
 
   async home() {
     const { ctx } = this;
-    console.log('访问者', ctx.request);
-    ctx.body = '你好 访问者 zhangzhao';
+    // console.log('访问者', ctx.request);
+    ctx.body = '您好 访问者 欢迎您';
   }
 }
 

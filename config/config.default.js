@@ -30,6 +30,7 @@ module.exports = appInfo => {
   };
 
   config.page = {
+    page: 1,
     size: 20,
   };
 
@@ -43,6 +44,11 @@ module.exports = appInfo => {
   exports.elasticsearch = {
     host: 'http://172.16.111.24:9200',
     apiVersion: '7.6',
+  };
+
+  exports.valparams = {
+    locale: 'zh-cn',
+    throwError: true,
   };
 
   config.mysql = {

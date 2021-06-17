@@ -19,3 +19,8 @@ exports.elasticsearch = {
   enable: true,
   package: 'egg-es',
 };
+
+exports.valparams = {
+  enable: true,
+  package: 'egg-valparams',
+};

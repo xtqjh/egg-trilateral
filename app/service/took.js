@@ -12,7 +12,7 @@ class TookService extends Service {
     }
     const sql_count = `SELECT COUNT(*) FROM zc_took ${where};`;
     const sql_where = `SELECT * FROM zc_took ${where} ORDER BY create_time DESC LIMIT ${(data.page - 1) * (data.size || size)},${data.size || size};`;
-    console.log(sql_count, sql_where, data, size);
+    // console.log(sql_count, sql_where, data, size);
     const client = this.app.mysql.get('notes');
     const result = await client.query(sql_count + sql_where, []);
     return this.success({

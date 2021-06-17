@@ -1,7 +1,7 @@
 <html>
 
 <head>
-  <title>Hacker News</title>
+  <title>日志</title>
   <style>
     .table {
       width: 100%
@@ -11,21 +11,25 @@
 
 <body>
   <table class="table">
+    <tr class="item">
+      <td>状态</td>
+      <td>索引</td>
+      <td>数量</td>
+      <td>大小</td>
+      <td>操作</td>
+    </tr>
     {% for item in list %}
     <tr class="item">
-      <td>{{ item.id }}</td>
-      <td>{{ item.title }}</td>
       <td>{{ item.status }}</td>
-      <td>{{ item.terminal }}</td>
+      <td>{{ item.index }}</td>
+      <td>{{ item['docs.count'] }}</td>
+      <td>{{ item['store.size'] }}</td>
       <td>
-        <pre>{{ item.data }}</pre>
+        <a href="/logs/{{item.index}}">查看</a>
       </td>
-      <td>{{ item.create_time }}</td>
     </tr>
     {% endfor %}
   </table>
-  {{ result.size }}|
-  {{ result.totalElements }}
 </body>
 
 </html>
