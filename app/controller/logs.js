@@ -20,7 +20,7 @@ class LogsController extends Controller {
       os: { type: 'string', desc: '操作系统' },
       url: { type: 'string', desc: '请求地址' },
       status: { type: 'int', desc: '请求返回状态码' },
-      body: { type: 'json', desc: '参数' },
+      body: { type: 'all', desc: '参数' },
       result: { type: 'all', desc: '返回' },
       errMessage: { type: 'all', desc: '错误信息' },
     });
