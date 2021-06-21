@@ -11,12 +11,12 @@ class LogsService extends Service {
     const keyword = { query_string: { query: data.keyword } };
     if (data.keyword) { searchQuery = keyword; }
     if (data.loginName || data.companyId) {
+      const musts = [];
+      if (data.loginName) { musts.push({ match: { loginName: data.loginName } }); }
+      if (data.companyId) { musts.push({ match: { companyId: data.companyId } }); }
       searchQuery = {
         bool: {
-          must: [
-            { match: data.loginName && { loginName: data.loginName } || {} },
-            { match: data.companyId && { companyId: data.companyId } || {} },
-          ],
+          must: musts,
           filter: data.keyword && keyword || {},
         },
       };

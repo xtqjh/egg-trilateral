@@ -54,7 +54,7 @@ class LogsController extends Controller {
     this.ctx.validate({
       indexName: { type: 'string', required: true, desc: '索引名称' },
       page: { type: 'int', required: false, range: { min: 1 }, desc: '当前页数' },
-      size: { type: 'int', required: false, range: { min: 10, max: 100 }, desc: '每页条数' },
+      size: { type: 'int', required: false, range: { min: 10, max: 500 }, desc: '每页条数' },
       keyword: { type: 'string', required: false, trim: true, desc: '搜索关键字' },
       loginName: { type: 'string', required: false, desc: '用户名称' },
       companyId: { type: 'string', required: false, desc: '组织机构ID' },
