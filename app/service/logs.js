@@ -9,7 +9,8 @@ class LogsService extends Service {
     const size = data.size || this.config.page.size;
     let searchQuery = { match_all: {} };
     let sortQuery = [{ createTime: 'desc' }];
-    const keyword = { query_string: { query: data.keyword } };
+    // const keyword = { query_string: { query: data.keyword } };
+    const keyword = [{ match_phrase: { body: { query: data.keyword } } }, { match_phrase: { url: { query: data.keyword } } }];
     if (data.keyword) { searchQuery = keyword; }
     if (data.loginName || data.companyId) {
       const musts = [];
@@ -18,7 +19,8 @@ class LogsService extends Service {
       searchQuery = {
         bool: {
           must: musts,
-          filter: data.keyword && keyword || {},
+          should: data.keyword && keyword || [],
+          minimum_should_match: 1,
         },
       };
     }
