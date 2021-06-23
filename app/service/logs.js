@@ -16,11 +16,12 @@ class LogsService extends Service {
       const musts = [];
       if (data.loginName) { musts.push({ match: { loginName: data.loginName } }); }
       if (data.companyId) { musts.push({ match: { companyId: data.companyId } }); }
+      if (data.startTime && data.endTime) { musts.push({ range: { createTime: { from: data.startTime, to: data.endTime } } }); }
       searchQuery = {
         bool: {
           must: musts,
           should: data.keyword && keyword || [],
-          minimum_should_match: 1,
+          minimum_should_match: data.keyword && 1 || 0,
         },
       };
     }

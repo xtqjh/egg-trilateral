@@ -59,6 +59,8 @@ class LogsController extends Controller {
       sort: { type: 'array', required: false, trim: true, desc: '排序' },
       loginName: { type: 'string', required: false, desc: '用户名称' },
       companyId: { type: 'string', required: false, desc: '组织机构ID' },
+      startTime: { type: 'date', required: false, desc: '记录开始时间' },
+      endTime: { type: 'date', required: false, desc: '记录结束时间' },
     });
 
     const result = await this.service.logs.list(this.ctx.query);
