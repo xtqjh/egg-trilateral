@@ -12,7 +12,7 @@ class LogsService extends Service {
     // const keyword = { query_string: { query: data.keyword } };
     const keyword = [{ match_phrase: { body: { query: data.keyword } } }, { match_phrase: { url: { query: data.keyword } } }];
     if (data.keyword) { searchQuery = keyword; }
-    if (data.loginName || data.companyId) {
+    if (data.loginName || data.companyId || (data.startTime && data.endTime)) {
       const musts = [];
       if (data.loginName) { musts.push({ match: { loginName: data.loginName } }); }
       if (data.companyId) { musts.push({ match: { companyId: data.companyId } }); }
