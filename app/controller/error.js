@@ -52,7 +52,7 @@ class ErrorController extends Controller {
       sort: { type: 'array', required: false, trim: true, desc: '排序' },
       startTime: { type: 'date', required: false, desc: '记录开始时间' },
       endTime: { type: 'date', required: false, desc: '记录结束时间' },
-      client: { type: 'string', required: true, desc: '终端' },
+      client: { type: 'string', required: false, desc: '终端' },
     });
 
     const result = await this.service.logs.list(this.ctx.query);
