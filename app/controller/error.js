@@ -10,6 +10,7 @@ class ErrorController extends Controller {
 
     ctx.validate({
       indexName: { type: 'string', required: true, desc: '索引名称' },
+      client: { type: 'string', required: true, desc: '终端' },
       host: { type: 'string', desc: '域名' },
       explore: { type: 'string', desc: '浏览器' },
       os: { type: 'string', desc: '操作系统' },
@@ -25,16 +26,15 @@ class ErrorController extends Controller {
     const addResult = await this.app.elasticsearch.index({
       index: body.indexName || 'ylzx-error',
       type: '_doc',
-      body: { createTime: new Date(), host: body.host, explore: body.explore, os: body.os, url: body.url, errMessage: body.errMessage, title: body.title },
+      body: { createTime: new Date(), host: body.host, explore: body.explore, os: body.os, url: body.url, errMessage: body.errMessage, title: body.title, client: body.client },
     }).then(
       res => this.app.elasticsearch.index({
-        index: 'error-html',
+        index: 'ylzx-error-page',
         type: '_doc',
         id: res._id,
         body: { createTime: new Date(), html: body.html, image: body.image },
       })
     );
-    console.log('b', addResult);
     if (addResult.errors) {
       ctx.body = this.fail('fail');
     } else {
@@ -52,6 +52,7 @@ class ErrorController extends Controller {
       sort: { type: 'array', required: false, trim: true, desc: '排序' },
       startTime: { type: 'date', required: false, desc: '记录开始时间' },
       endTime: { type: 'date', required: false, desc: '记录结束时间' },
+      client: { type: 'string', required: true, desc: '终端' },
     });
 
     const result = await this.service.logs.list(this.ctx.query);
