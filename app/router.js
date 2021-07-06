@@ -13,5 +13,7 @@ module.exports = app => {
   require('./router/took')(app);
   require('./router/clients')(app);
 
+  require('./router/simple')(app);
+
 
 };

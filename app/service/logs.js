@@ -42,6 +42,7 @@ class LogsService extends Service {
       size,
       // _source: ['url', 'loginName', 'method', 'status', 'ok', 'host', 'explore', 'os', 'createTime'],
       body: {
+        track_total_hits: true,
         query: searchQuery,
         sort: sortQuery,
       },
