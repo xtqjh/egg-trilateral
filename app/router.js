@@ -9,6 +9,7 @@ module.exports = app => {
 
   router.resources('logs', '/api/logs', controller.logs);
   router.resources('error', '/api/error', controller.error);
+  router.resources('transorder', '/api/transorder', controller.transorder);
 
   require('./router/took')(app);
   require('./router/clients')(app);

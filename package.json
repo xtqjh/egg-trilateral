@@ -9,7 +9,7 @@
   "dependencies": {
     "egg": "^2.15.1",
     "egg-cors": "^2.2.0",
-    "egg-es": "^1.2.2",
+    "elasticsearch": "^16.7.1",
     "egg-mysql": "^3.0.0",
     "egg-scripts": "^2.11.0",
     "egg-valparams": "^1.4.5",
