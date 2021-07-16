@@ -23,7 +23,10 @@ class TransOrderController extends Controller {
     if (data.keyword) { searchQuery = keyword; }
     if ((data.startTime && data.endTime) || (data.status && Array.isArray(data.status))) {
       const musts = [];
-      if (data.startTime && data.endTime) { musts.push({ range: { createTime: { from: data.startTime, to: data.endTime } } }); }
+      if (data.startTime && data.endTime) {
+        musts.push({ range: { createTime: { gte: new Date(data.startTime).getTime(), lte: new Date(data.endTime).getTime() } } });
+        // musts.push({ range: { createTime: { from: new Date(data.startTime).getTime(), to: new Date(data.endTime).getTime() } } });
+      }
       if (data.status && Array.isArray(data.status)) {
         musts.push({ terms: { status: data.status } });
       }
@@ -37,7 +40,7 @@ class TransOrderController extends Controller {
     }
 
     const result = await this.app.es.search({
-      index: 'ylzxtransorderv3',
+      index: 'ylzxtransorderv4',
       from: (page - 1) * size,
       size,
       _source: ['receiveAddress', 'receiveLocation', 'receiveName', 'sendAddress', 'sendLocation', 'sendName', 'status', 'statusDesc', 'createTime'],
