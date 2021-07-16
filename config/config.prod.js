@@ -42,7 +42,7 @@ module.exports = appInfo => {
   };
 
   config.elasticsearch = {
-    nodeA: 'http://172.16.110.33:9200',
+    nodeA: 'http://172.16.100.41:9200',
     nodeB: 'http://172.16.111.24:9200',
   };
 
