@@ -14,6 +14,7 @@ class LogsService extends Service {
       { match_phrase: { body: { query: data.keyword } } },
       { match_phrase: { url: { query: data.keyword } } },
       { match_phrase: { title: { query: data.keyword } } },
+      { match_phrase: { result: { query: data.keyword } } },
     ];
     if (data.keyword) { searchQuery = keyword; }
     if (data.loginName || data.companyId || (data.startTime && data.endTime) || data.client || data.key || data.sid || data.tid) {
