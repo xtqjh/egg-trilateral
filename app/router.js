@@ -12,6 +12,8 @@ module.exports = app => {
   router.resources('transorder', '/api/transorder', controller.transorder);
   router.resources('order', '/api/order', controller.order);
 
+  require('./router/logs')(app);
+
   require('./router/took')(app);
   require('./router/clients')(app);
 

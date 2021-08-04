@@ -54,6 +54,47 @@ class LogsService extends Service {
     return result;
   }
 
+  async count(data) {
+    let searchQuery = { match_all: {} };
+    const keyword = [
+      { match_phrase: { body: { query: data.keyword } } },
+      { match_phrase: { url: { query: data.keyword } } },
+      { match_phrase: { title: { query: data.keyword } } },
+      { match_phrase: { result: { query: data.keyword } } },
+    ];
+    if (data.keyword) { searchQuery = keyword; }
+    if (data.loginName || data.companyId || (data.startTime && data.endTime) || data.client || data.key || data.sid || data.tid ||
+      data.hasOwnProperty('method') || data.hasOwnProperty('status') || data.hasOwnProperty('ok')
+    ) {
+      const musts = [];
+      if (data.loginName) { musts.push({ match: { loginName: data.loginName } }); }
+      if (data.companyId) { musts.push({ match: { companyId: data.companyId } }); }
+      if (data.startTime && data.endTime) { musts.push({ range: { createTime: { from: data.startTime, to: data.endTime } } }); }
+      if (data.client) { musts.push({ match: { client: data.client } }); }
+      if (data.key) { musts.push({ match: { key: data.key } }); }
+      if (data.sid) { musts.push({ match: { sid: data.sid } }); }
+      if (data.tid) { musts.push({ match: { tid: data.tid } }); }
+      if (data.hasOwnProperty('method')) { musts.push({ match: { method: data.method } }); }
+      if (data.hasOwnProperty('status')) { musts.push({ match: { status: data.status } }); }
+      if (data.hasOwnProperty('ok')) { musts.push({ match: { ok: data.ok } }); }
+      searchQuery = {
+        bool: {
+          must: musts,
+          should: data.keyword && keyword || [],
+          minimum_should_match: data.keyword && 1 || 0,
+        },
+      };
+    }
+
+    const result = await this.app.elasticsearch.count({
+      index: data.indexName || 'ylzx-logs',
+      body: {
+        query: searchQuery,
+      },
+    });
+    return result;
+  }
+
 
 }
 

@@ -75,6 +75,22 @@ class LogsController extends Controller {
     };
   }
 
+  async count() {
+    this.ctx.validate({
+      indexName: { type: 'string', required: true, desc: '索引名称' },
+      keyword: { type: 'string', required: false, trim: true, desc: '搜索关键字' },
+      loginName: { type: 'string', required: false, desc: '用户名称' },
+      companyId: { type: 'string', required: false, desc: '组织机构ID' },
+      startTime: { type: 'date', required: false, desc: '记录开始时间' },
+      endTime: { type: 'date', required: false, desc: '记录结束时间' },
+      method: { type: 'string', required: false, desc: '请求类型' },
+      status: { type: 'int', required: false, desc: '状态码' },
+      ok: { type: 'bool', required: false, desc: '状态' },
+    });
+    const result = await this.service.logs.count(this.ctx.query);
+    this.ctx.body = result;
+  }
+
 }
 
 module.exports = LogsController;
