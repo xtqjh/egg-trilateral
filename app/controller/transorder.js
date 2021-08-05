@@ -43,7 +43,7 @@ class TransOrderController extends Controller {
       index: 'ylzxtransorderv4',
       from: (page - 1) * size,
       size,
-      _source: ['receiveAddress', 'receiveLocation', 'receiveName', 'sendAddress', 'sendLocation', 'sendName', 'status', 'statusDesc', 'createTime'],
+      _source: ['receiveAddress', 'receiveLocation', 'receiveName', 'sendAddress', 'sendLocation', 'sendName', 'status', 'statusDesc', 'createTime', 'volume', 'weight', 'transOrderCode'],
       body: {
         // track_total_hits: true,
         query: searchQuery,
