@@ -1,14 +1,34 @@
-environment:
-  matrix:
-    - nodejs_version: '10'
+image: node:12
+
+cache:
+  paths:
+    - node_modules/
+
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive
+
+stages:
+  - install
+  - lint
+  - build
+
+lint:
+  stage: lint
+  script:
+    - npm run lint
 
 install:
-  - ps: Install-Product node $env:nodejs_version
-  - npm i npminstall && node_modules\.bin\npminstall
+  stage: install
+  script:
+    - npm config get registry 
+    - npm config set registry http://172.16.111.21:8088/nexus/repository/angular8-group-npm/
+    - npm config get registry 
+    - npm run info
 
-test_script:
-  - node --version
-  - npm --version
-  - npm run test
-
-build: off
+build:
+  stage: build
+  script:
+    - npm run ci
+    - ls
+    - cd dist/
+    - ls
