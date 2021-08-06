@@ -1,34 +1,42 @@
-image: node:12
+# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-cache:
-  paths:
-    - node_modules/
+name: Node.js CI
 
-variables:
-  GIT_SUBMODULE_STRATEGY: recursive
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  schedule:
+    - cron: '0 2 * * *'
 
-stages:
-  - install
-  - lint
-  - build
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
 
-lint:
-  stage: lint
-  script:
-    - npm run lint
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [10]
+        os: [ubuntu-latest, windows-latest, macos-latest]
 
-install:
-  stage: install
-  script:
-    - npm config get registry 
-    - npm config set registry http://172.16.111.21:8088/nexus/repository/angular8-group-npm/
-    - npm config get registry 
-    - npm --loglevel info install
+    steps:
+    - name: Checkout Git Source
+      uses: actions/checkout@v2
 
-build:
-  stage: build
-  script:
-    - npm run ci
-    - ls
-    - cd dist/
-    - ls
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Install Dependencies
+      run: npm --loglevel info install
+
+    - name: Continuous Integration
+      run: npm run ci
+
+    - name: Code Coverage
+      uses: codecov/codecov-action@v1
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
