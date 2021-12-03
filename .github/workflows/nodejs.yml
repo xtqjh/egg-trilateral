@@ -31,7 +31,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
 
     - name: Install Dependencies
-      run: npm --loglevel info install
+      run: npm i -g npminstall && npminstall
 
     - name: Continuous Integration
       run: npm run ci
